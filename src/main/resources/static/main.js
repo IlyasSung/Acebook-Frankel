@@ -54,6 +54,7 @@ function AjaxReady(){
         if(FormButton.nodeName === "INPUT" && FormButton.getAttribute("type")=="submit"){
             const newFormButton = document.createElement("button");
             newFormButton.className=FormButton.className;
+            newFormButton.setAttribute("id",FormButton.getAttribute("id"));
             newFormButton.innerHTML=FormButton.getAttribute("value");
             FormButton.parentElement.appendChild(newFormButton);
             FormButton.remove();
@@ -176,6 +177,28 @@ function SetupProfileImageUploader(path){
     }
 }
 
+function SubmitBtnInPosts() {
+    if(document.getElementsByClassName("main-btn").length > 0 && document.getElementsByClassName("main-input").length > 0){
+        const inputBox = document.getElementsByClassName("main-input")[0];
+    
+        const mainPostBtn = document.getElementsByClassName("main-btn")[0];
+        mainPostBtn.disabled = 'true';
+    
+        inputBox.addEventListener('input', output);
+        function output(e) {
+            if (e.target.value == "") {
+                
+                mainPostBtn.disabled = 'true';
+            }else {
+                mainPostBtn.setAttribute("class","button main-btn flex-center")
+                mainPostBtn.removeAttribute("disabled");
+            }
+    
+        }
+    }
+    console.log("Post submit init");
+}
+
 function SetupAll(){
     FindPhoto();
     AjaxReady();
@@ -183,6 +206,9 @@ function SetupAll(){
     const path = window.location.pathname.split("/");
     if(path[1]=="users" && path.length > 2){
         SetupProfileImageUploader(path);
+    }
+    if(window.location.pathname=="/posts" || window.location.pathname=="/posts/"){
+        SubmitBtnInPosts();
     }
 }
 

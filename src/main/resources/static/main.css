@@ -87,7 +87,7 @@ a:hover {
 
 .submit-btn {
     display:flex;
-    flex-direction:row-reverse;
+    /* flex-direction:row-reverse; */
     gap:10px;
 }
 
@@ -366,3 +366,24 @@ button:hover, a:hover{
     font-size: larger;
   }
   
+
+  .submit-and-clear-btn{
+    display:flex;
+  }
+
+  #submit:disabled {
+    background:#999;
+    color:black;
+    cursor:not-allowed;
+  }
+  #submit:disabled:hover {
+    background:#999;
+    color:black;
+    opacity:1;
+}
+
+.cancel:hover {
+    cursor: pointer;
+    opacity:0.8;
+
+}
