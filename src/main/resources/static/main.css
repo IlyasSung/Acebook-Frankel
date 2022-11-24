@@ -101,10 +101,10 @@ a:hover {
     border:none;
     background:none;
     vertical-align: middle;
-    background-image: linear-gradient(to top right, rgb(7, 72, 151), rgb(61, 106, 170));    
+    background-image: linear-gradient(to top right, rgb(7, 72, 151), rgb(61, 106, 170));
     text-align: center;
     color: rgb(13, 201, 241);
-    
+
 }
 
 ul {
@@ -200,7 +200,7 @@ ul {
 .reply-btn {
     width:80px;
     height:32px;
-
+    font-size: 15px;
 }
 
 .reply {
@@ -213,7 +213,7 @@ ul {
     justify-content: space-evenly;
     overflow-x: scroll;
     white-space: nowrap;
-    
+
 }
 
 .card {
@@ -267,7 +267,7 @@ button:hover, a:hover{
     /* border-radius: 10px; */
     height: 300px;
     width:100%;
-    
+
 }
 
 .logo-size div{
@@ -282,7 +282,7 @@ button:hover, a:hover{
     text-align: center;
     border-radius: 10px;
     border: 10px solid gray;
-    height: 150px; 
+    height: 150px;
 }
 
 .font{
@@ -365,7 +365,7 @@ button:hover, a:hover{
     color: rgb(13, 201, 241);
     font-size: larger;
   }
-  
+
 
   .submit-and-clear-btn{
     display:flex;
@@ -386,6 +386,39 @@ button:hover, a:hover{
     cursor: pointer;
     opacity:0.8;
 
+}
+
+.container {
+  margin: 3vw 5vw;
+}
+
+.home-background {
+  background-image: url("/logo5.png");
+  background-position-y: center;
+  background-position-x: 45%;
+  background-size: cover;
+  height: 100vh;
+}
+
+.home-btn {
+  background-color: rgb(221, 239, 248);
+  border-radius: 10px;
+  color: rgb(36, 91, 161);
+  display: block;
+  margin: 10px;
+}
+
+.links {
+  text-align: center;
+  width: 500px;
+  margin: auto;
+  margin-top: 400px;
+}
+
+
+.home-container {
+  margin: auto;
+  height: 100%;
 }
 
 .user-signup-form{
@@ -430,3 +463,4 @@ button:hover, a:hover{
     font-size: larger;
     cursor:pointer;
 }
+

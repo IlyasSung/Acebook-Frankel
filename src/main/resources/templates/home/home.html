@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Acebook</title>
+        <link rel="stylesheet" href="/main.css" />
+    </head>
+    <body>
+      <div class="home-background">
+        <div class="header" th:replace="common/navbar::headernavfragment"></div>
+        <div class="container">
+          <div class="home-container">
+            <div class="links">
+              <a href="/users/new" class="home-btn">Sign Up</a>
+              <a href="/login" class="home-btn">Login</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </body>
+</html>
