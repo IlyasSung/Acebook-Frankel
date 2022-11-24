@@ -30,6 +30,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.view.RedirectView;
 import org.springframework.web.util.HtmlUtils;
 
@@ -67,10 +68,15 @@ public class UsersController {
     @Autowired
     PasswordEncoder passwordEncoder;
 
-    @GetMapping("/users/new")
-    public String signup(Model model) {
-        model.addAttribute("user", new User());
-        return "users/new";
+    @RequestMapping("/users/new")
+    public String signup(@RequestParam(name="error", required = false) String error, Model model) {
+      String errorMsg = error;
+      if(errorMsg.toString().equals("username_taken")){
+        errorMsg = "That username has been taken. Please choose a different one.";
+      }
+      model.addAttribute("user", new User());
+      model.addAttribute("errorMsg", errorMsg);
+      return "users/new";
     }
 
     @GetMapping("/users/me")
@@ -111,11 +117,17 @@ public class UsersController {
     @PostMapping("/users")
     public RedirectView signup(@ModelAttribute User user, Principal principal) {
         user.setUsername(HtmlUtils.htmlEscape(user.getUsername()));
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        urepository.save(user);
-        Authority authority = new Authority(user.getUsername(), "ROLE_USER");
-        authoritiesRepository.save(authority);
-        return new RedirectView("/login");
+        // check if username exists
+        Optional<User> userOptional = urepository.findByUsername(user.getUsername());
+        if(userOptional.isPresent()){
+          return new RedirectView("/users/new?error=username_taken");
+        }else{
+          user.setPassword(passwordEncoder.encode(user.getPassword()));
+          urepository.save(user);
+          Authority authority = new Authority(user.getUsername(), "ROLE_USER");
+          authoritiesRepository.save(authority);
+          return new RedirectView("/login");
+        }
     }
 
     @RequestMapping(value="/users/{username}")
