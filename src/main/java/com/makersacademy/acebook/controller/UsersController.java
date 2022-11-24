@@ -70,10 +70,13 @@ public class UsersController {
     PasswordEncoder passwordEncoder;
 
     @RequestMapping("/users/new")
-    public String signup(@RequestParam(name="error", required = false) String error, Model model) {
-      String errorMsg = error;
-      if(errorMsg.toString().equals("username_taken")){
-        errorMsg = "That username has been taken. Please choose a different one.";
+    public String signup(@RequestParam(name="error", required = false) Optional<String> errorOptional, Model model) {
+      String errorMsg = "";
+      if(errorOptional.isPresent()){
+        String errorParam = errorOptional.get().toString();
+        if(errorParam.equals("username_taken")){
+          errorMsg = "That username has been taken. Please choose a different one.";
+        }
       }
       model.addAttribute("user", new User());
       model.addAttribute("errorMsg", errorMsg);
