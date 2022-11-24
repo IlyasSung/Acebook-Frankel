@@ -32,6 +32,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.view.RedirectView;
 import org.springframework.web.util.HtmlUtils;
+import org.thymeleaf.util.ArrayUtils;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -97,6 +98,18 @@ public class UsersController {
         Iterable<User> users = urepository.findAll();
         Iterable<Friend> friends = friendRepository.findAll();
         int num_of_friends = 0;
+        ArrayList<User> users_without_us = new ArrayList<User>();
+        String currentUserName = principal.getName();
+        Optional<User> currentUser = urepository.findByUsername(currentUserName);
+        User me = currentUser.get();
+        Long myUserIdLong = me.getId();
+
+        for(User u: users){
+          if (u.getId() != myUserIdLong){
+            users_without_us.add(u);
+          }
+        }
+
         for(Friend f: friends){
           if (f.getConfirmed() == 1){
             num_of_friends = num_of_friends + 1;
@@ -104,7 +117,7 @@ public class UsersController {
           }
         }
         model.addAttribute("numOfFriends", num_of_friends);
-        model.addAttribute("all_users", users);
+        model.addAttribute("all_users", users_without_us);
         return "users/index";
     }
 
