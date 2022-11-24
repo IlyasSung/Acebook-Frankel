@@ -3,7 +3,7 @@
           xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5" >
     <head lang="en">
         <meta charset="UTF-8"/>
-        <title>Acebook</title>
+        <title>Posts | Acebook</title>
         <link rel="stylesheet" href="/main.css" />
         <script src="/index_script.js" defer></script>
     </head>
@@ -16,7 +16,7 @@
                     <input class="main-input" type="text" placeholder="The new Twitter" th:field="*{content}" />
                 </div>
                 <div class="submit-btn">
-                    <input class="button main-btn flex-center" type="submit" value="Post" id="submit"/>
+                    <button class="button main-btn flex-center" id="submit">Post</button>
                     <input class="button cancel flex-center" type="reset" value="Clear" />
                 </div>
             </form>

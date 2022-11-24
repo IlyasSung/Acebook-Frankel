@@ -3,24 +3,23 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>Signup</title>
+        <title>Signup | Acebook</title>
     </head>
     <body>
         <div class="header" th:replace="common/navbar::headernavfragment"></div>
-        
-        <form action="#" th:action="@{/users}" th:object="${user}" method="post" enctype="multipart/form-data">
-            <p>Username: <input type="text" th:field="*{username}" /></p>
-            <p>Password: <input type="password" th:field="*{password}" /></p>
+        <form class="user-signup-form" action="#" th:action="@{/users}" th:object="${user}" method="post" enctype="multipart/form-data">
+            <p>Username: <input required type="text" th:field="*{username}" /></p>
+            <p>Password: <input required type="password" th:field="*{password}" /></p>
 
-            <div>
+            <p>
                 <label>Photo: </label>
                 <input type="hidden" name="image" id="base64-data-input" />
                 <div id="file-uploader-container">
-                    <input type="file" id="file-upload-input" accept="image/*">
+                    <input required type="file" id="file-upload-input" accept="image/*">
                 </div>
-            </div>
-            
-            <p><input type="submit" value="Submit" id="submit"/> <input type="reset" value="Reset" /></p>
+            </p>
+            <p style="color:red;" th:text="${errorMsg}"></p>
+            <p><button id="submit">Submit</button> <input type="reset" value="Reset" /></p>
         </form>
     </body>
 </html>
