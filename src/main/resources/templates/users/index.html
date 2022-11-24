@@ -12,33 +12,36 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@700&display=swap" rel="stylesheet">
 
-        
+
     </head>
     <body>
+      <div class="background-users">
 
-        <div class="header" th:replace="common/navbar::headernavfragment"></div>
-        <div class="logo-size">
-            <img src="/logo3.png">
-            <div class="align">
-                <p class="font">Make New Connections</p>
+            <div class="header" th:replace="common/navbar::headernavfragment"></div>
+            <!-- <div class="user-header">
+            </div> -->
+            <div class="logo-size">
+                <!-- <img src="/logo3.png"> -->
+                <div class="align" style="margin-bottom: 2%; height: 80px; margin-top:-2%;">
+                    <p style="padding-top: 2%;" class="font">Make New Connections</p>
+                </div>
             </div>
+
+        <div class= "user-card">
+            <div th:each="user: ${all_users}">
+                <div class= "card">
+                    <img th:src="${user.image}" style="width:100%"/>
+                    <a th:href='${user.username}'><h1 class ="w3-serif username-card-name" th:text="${user.username}"></h1></a>
+                    <div class="align">
+                        <p th:text= "${numOfFriends}"></p>
+                        <p th:text= Friends></p>
+                        <p><a th:href='${user.username}'><button class="users-btn">Add Friend</button></a></p>
+                    </div>
+                </div>
+            </div>
+
         </div>
-
-    <div class= "user-card">
-        <ul th:each="user: ${all_users}">
-            <div class= "card">
-                <img th:src="${user.image}" style="width:100%"/> 
-                <a th:href='${user.username}'><h1 class = "w3-serif" th:text="${user.username}"></h1></a>
-                <li class="align">
-                    <p th:text= "${numOfFriends}"></p>
-                    <p th:text=  Friends></p>
-                    <p><a th:href='${user.username}'><button>Add Friend</button></a></p>
-            </div>
-                </li>
-        </ul>
-            
-    </div>
+      </div>
 
     </body>
 </html>
-
